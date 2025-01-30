@@ -2,21 +2,18 @@ package main
 
 import (
 	"fmt"
-	"net/http"
-	"github.com/gin-gonic/gin"
 	"gocurd/database"
+	"gocurd/models"
+	"gocurd/router"
 )
 
 func main() {
 	database.Connect()
+	models.Migrate()
 
 	fmt.Println("Successfully Connected")
 
-	r := gin.Default()
-	r.GET("/ping", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{
-		"message": "pong",
-		})
-	})
+	r :=router.SetupRouter()
 	r.Run()
+
 }
