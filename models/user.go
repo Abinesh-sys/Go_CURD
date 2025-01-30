@@ -8,9 +8,9 @@ import (
 
 type User struct {
 	gorm.Model
-	Title string `json:"title" validate:"required"`
-	Body  string `json:"body" validate:"required"`
-	TagList pq.StringArray `json:"taglist" gorm:"type:text[]"`
+	Title 	string 			`json:"title" validate:"required"`
+	Body 	string 			`json:"body" validate:"required"`
+	TagList pq.StringArray 	`json:"taglist" gorm:"type:text[]"`
 
 }
 
