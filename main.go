@@ -1,7 +1,12 @@
 package main 
 
-import "fmt"
+import (
+	"fmt"
+	"gocurd/database"
+)
 
 func main() {
-	fmt.Println("Hello World!")
+	database.Connect()
+
+	fmt.Println("Successfully Connected")
 }
