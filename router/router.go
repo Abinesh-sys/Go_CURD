@@ -6,9 +6,17 @@ import (
 )
 
 func SetupRouter() *gin.Engine {
-
 	r := gin.Default()
-	r.Use(gin.Recovery())
+
+	// Serve static files (CSS, JS, images)
+	r.Static("/static", "./views/static")
+
+	// Serve HTML file for posts
+	r.GET("/", func(c *gin.Context) {
+		c.File("./views/index.html")
+	})
+
 	controller.UserController(r)
+
 	return r
 }

@@ -14,6 +14,6 @@ func main() {
 	fmt.Println("Successfully Connected")
 
 	r :=router.SetupRouter()
-	r.Run()
+	r.Run(":8081")
 
 }
