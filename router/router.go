@@ -16,6 +16,8 @@ func SetupRouter() *gin.Engine {
 		c.File("./views/index.html")
 	})
 
+	
+
 	controller.UserController(r)
 
 	return r

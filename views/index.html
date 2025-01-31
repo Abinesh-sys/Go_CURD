@@ -65,13 +65,37 @@
                     <h3>${post.title}</h3>
                     <p>${post.body}</p>
                     <p><strong>Tags:</strong> ${post.taglist.join(', ')}</p>
+                    <button onclick="deletePost(${post.id})">Delete</button>
                 `;
                 postList.appendChild(postElement);
             });
         }
+
+        async function deletePost(postID) {
+        const response = await fetch(`/delete-post/${postID}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        const result = await response.json();
+        if (response.ok) {
+            alert("Post deleted successfully!");
+            window.location.href = "/";  // Redirect to the homepage or another page
+        } else {
+            alert("Error: " + result.error);
+        }
+    }
 
         window.onload = loadPosts;
     </script>
 
 </body>
 </html>
+
+
+
+
+
+
