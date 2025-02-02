@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Posts</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>All Posts</h1>
+        <div id="postList"></div>
+    </div>
+
+    <script>
+        async function loadPosts() {
+            const response = await fetch('/get-post');
+            const data = await response.json();
+
+            const postList = document.getElementById('postList');
+            postList.innerHTML = '';
+
+            data.user.forEach(post => {
+                const postElement = document.createElement('div');
+                postElement.classList.add('post-card');
+                postElement.innerHTML = `
+                    <h3><a href="/post/${post.id}" class="post-link">${post.title}</a></h3>
+                    <p>${post.body}</p>
+                    <p><strong>Tags:</strong> ${post.taglist.join(', ')}</p>
+                `;
+                postList.appendChild(postElement);
+            });
+        }
+
+        window.onload = loadPosts;  // Load posts when the page loads
+    </script>
+</body>
+</html>

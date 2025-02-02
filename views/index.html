@@ -3,27 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Post</title>
+    <title>Create Posts</title>
     <link rel="stylesheet" href="/static/style.css">
-
 </head>
 <body>
-
     <div class="container">
-        <h1>Post</h1>
-
-        <!-- Post Creation Form -->
-        <h2>Create a New Post</h2>
+        <h1>Create a New Post</h1>
         <form id="postForm">
-            <input type="text" id="title" name="title" placeholder="Enter Post Title" required>
-            <textarea id="body" name="body" placeholder="Enter Post Content" required></textarea>
-            <input type="text" id="taglist" name="taglist" placeholder="Enter Tags (comma separated)">
-            <button type="submit">Create Post</button>
+            <input type="text" id="title" name="title" placeholder="Enter Post Title" required><br>
+            <textarea id="body" name="body" placeholder="Enter Post Content" required></textarea><br>
+            <input type="text" id="taglist" name="taglist" placeholder="Enter Tags (comma separated)"><br>
+            <button type="submit">Create</button>
         </form>
-
-        <!-- Post List -->
-        <h2>All Posts</h2>
-        <div id="postList"></div>
+        
     </div>
 
     <script>
@@ -32,69 +24,24 @@
 
             const title = document.getElementById('title').value;
             const body = document.getElementById('body').value;
-            const taglist = document.getElementById('taglist').value.split(',');
+            const taglist = document.getElementById('taglist').value.split(',').map(tag => tag.trim());
 
             const response = await fetch('/create-post', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ title, body, taglist })
             });
 
             if (response.ok) {
                 alert('Post created successfully!');
-                loadPosts();
-                document.getElementById('postForm').reset();
+                window.location.href = "/allpost";  // Redirect to all posts after creation
             } else {
                 alert('Failed to create post.');
             }
         });
-
-        async function loadPosts() {
-            const response = await fetch('/get-post');
-            const data = await response.json();
-
-            const postList = document.getElementById('postList');
-            postList.innerHTML = '';
-
-            data.user.forEach(post => {
-                const postElement = document.createElement('div');
-                postElement.classList.add('post-card');
-                postElement.innerHTML = `
-                    <h3>${post.title}</h3>
-                    <p>${post.body}</p>
-                    <p><strong>Tags:</strong> ${post.taglist.join(', ')}</p>
-                    <button onclick="deletePost(${post.id})">Delete</button>
-                `;
-                postList.appendChild(postElement);
-            });
-        }
-
-        async function deletePost(postID) {
-        const response = await fetch(`/delete-post/${postID}`, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        });
-
-        const result = await response.json();
-        if (response.ok) {
-            alert("Post deleted successfully!");
-            window.location.href = "/";  // Redirect to the homepage or another page
-        } else {
-            alert("Error: " + result.error);
-        }
-    }
-
-        window.onload = loadPosts;
     </script>
-
 </body>
 </html>
-
-
 
 
 

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post Details</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1 id="postTitle"></h1>
+        <p id="postBody"></p>
+        <p><strong>Tags:</strong> <span id="postTags"></span></p>
+
+        <button onclick="window.location.href='/edit-post/' + postId">Edit Post</button>
+        <button onclick="deletePost()">Delete</button>
+        <button onclick="window.location.href='/allpost'">Back to All Posts</button>
+    </div>
+
+    <script>
+        const postId = window.location.pathname.split('/').pop();
+
+        async function loadPost() {
+            const response = await fetch(`/get-post/${postId}`);
+            const post = await response.json();
+
+            if (post) {
+                document.getElementById('postTitle').innerText = post.title;
+                document.getElementById('postBody').innerText = post.body;
+                document.getElementById('postTags').innerText = post.taglist.join(', ');
+            } else {
+                alert("Post not found");
+                window.location.href = "/allpost";
+            }
+        }
+
+        async function deletePost() {
+            const response = await fetch(`/delete-post/${postId}`, {
+                method: 'DELETE',
+                headers: { 'Content-Type': 'application/json' }
+            });
+
+            if (response.ok) {
+                alert("Post deleted successfully!");
+                window.location.href = "/allpost";  // Redirect to all posts after deletion
+            } else {
+                alert("Error deleting post.");
+            }
+        }
+
+        window.onload = loadPost;
+    </script>
+</body>
+</html>

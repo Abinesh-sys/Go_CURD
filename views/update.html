@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Post</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Edit Post</h1>
+        <form id="updatePostForm">
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title" required><br>
+
+            <label for="body">Body:</label>
+            <textarea id="body" name="body" required></textarea><br>
+
+            <label for="taglist">Tags:</label>
+            <input type="text" id="taglist" name="taglist" required><br>
+
+            <button type="submit">Update</button>
+        </form>
+    </div>
+
+    <script>
+        const postId = window.location.pathname.split('/').pop();
+
+        async function loadPost() {
+            const response = await fetch(`/get-post/${postId}`);
+            const post = await response.json();
+
+            if (post) {
+                document.getElementById('title').value = post.title;
+                document.getElementById('body').value = post.body;
+                document.getElementById('taglist').value = post.taglist.join(', ');
+            } else {
+                alert("Post not found");
+            }
+        }
+
+        document.getElementById('updatePostForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const title = document.getElementById('title').value;
+            const body = document.getElementById('body').value;
+            const taglist = document.getElementById('taglist').value.split(',').map(tag => tag.trim());
+
+            const response = await fetch(`/update-post/${postId}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ title, body, taglist }),
+            });
+
+            if (response.ok) {
+                alert('Post updated successfully!');
+                window.location.href = `/post/${postId}`;
+            } else {
+                alert('Failed to update post.');
+            }
+        });
+
+        window.onload = loadPost;
+    </script>
+</body>
+</html>

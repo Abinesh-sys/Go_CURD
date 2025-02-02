@@ -3,148 +3,193 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Poppins', Arial, sans-serif;
 }
 
-/* Body Styling with Unique Gradient Background */
 body {
-    background: linear-gradient(to right, #1e3c72, #2a5298);
-    color: #333;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    padding: 30px;
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #3498db, #8e44ad);
+    color: #fff;
+    line-height: 1.6;
+    padding: 20px;
 }
 
-/* Container */
 .container {
-    width: 90%;
-    max-width: 850px;
-    background: #ffffff;
-    padding: 25px;
-    border-radius: 15px;
-    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
-    transition: 0.3s;
+    width: 80%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+    border-radius: 8px;
 }
 
-.container:hover {
-    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3);
-}
-
-/* Headings */
-h1, h2 {
-    text-align: center;
-    color: #222;
+h1, h2, h3 {
+    color: #fff;
     margin-bottom: 20px;
+    text-align: center;
 }
 
-/* Form Styling */
+h1 {
+    font-size: 3rem;
+}
+
+h2 {
+    font-size: 2rem;
+}
+
+h3 {
+    font-size: 1.5rem;
+}
+
+nav a {
+    color: #f39c12;
+    text-decoration: none;
+    font-size: 1rem;
+    padding: 10px;
+    margin-top: 20px;
+    display: inline-block;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+nav a:hover {
+    background-color: #f39c12;
+    color: #fff;
+}
+
+/* Forms */
 form {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    padding: 15px;
-    background: #f9f9f9;
-    border-radius: 10px;
-    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 30px;
 }
 
-input, textarea {
+input[type="text"],
+textarea {
     width: 100%;
     padding: 12px;
-    border: 2px solid #ddd;
+    margin: 10px 0;
+    border: 1px solid #ccc;
     border-radius: 8px;
-    font-size: 16px;
-    transition: 0.3s ease-in-out;
+    background-color: #fff;
+    color: #333;
+    font-size: 1rem;
 }
 
-input:focus, textarea:focus {
-    border-color: #00c3ff;
-    outline: none;
-    box-shadow: 0px 0px 8px rgba(0, 195, 255, 0.5);
+textarea {
+    height: 150px;
 }
 
-/* Button Styling */
 button {
-    background: #00c3ff;
-    color: white;
+    width: 100%;
     padding: 12px;
+    background-color: #3498db;
     border: none;
     border-radius: 8px;
-    font-size: 16px;
+    color: #fff;
+    font-size: 1.1rem;
     cursor: pointer;
-    transition: 0.3s ease-in-out;
+    margin-top: 10px;
 }
 
 button:hover {
-    background: #0099cc;
-    transform: scale(1.05);
+    background-color: #2980b9;
 }
 
-/* Post List */
-#postList {
-    margin-top: 20px;
-}
-
-/* Post Card */
+/* Post Cards */
 .post-card {
-    background: #ffffff;
-    padding: 20px;
-    margin-bottom: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
-    transition: 0.3s;
-    overflow-wrap: break-word;
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 15px;
+    margin: 20px 0;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.post-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
-}
-
-/* Post Title */
 .post-card h3 {
-    margin-bottom: 8px;
-    font-size: 22px;
-    color: #222;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
 }
 
-/* Post Content */
 .post-card p {
-    font-size: 15px;
-    color: #555;
+    font-size: 1rem;
+    color: #dcdcdc;
 }
 
-/* Delete Button */
+.post-link {
+    color: #f39c12;
+    text-decoration: none;
+}
+
+.post-link:hover {
+    color: #fff;
+}
+
+/* Buttons inside post cards */
 .post-card button {
-    background-color: #ff3b3b;
-    margin-top: 12px;
+    background-color: #e74c3c;
+    margin-top: 10px;
+    width: auto;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
 }
 
 .post-card button:hover {
-    background-color: #cc0000;
+    background-color: #c0392b;
 }
 
-/* Responsive */
+/* Backgrounds for different sections */
+.post-card:hover {
+    background-color: rgba(0, 0, 0, 0.4);
+    transition: background-color 0.3s;
+}
+
+button:active {
+    transform: scale(0.98);
+    transition: transform 0.1s;
+}
+
+/* Page Background and Text Shadows */
+body {
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+}
+
+.container {
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+h1, h2, h3, p {
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
+}
+
+button, .post-card button {
+    transition: background-color 0.3s, transform 0.1s;
+}
+
+/* Media Queries */
 @media (max-width: 768px) {
     .container {
-        width: 95%;
-        padding: 20px;
+        width: 90%;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
     }
 
     .post-card {
-        padding: 15px;
+        padding: 10px;
     }
 
-    h1, h2 {
-        font-size: 20px;
-    }
-
-    input, textarea {
-        font-size: 14px;
+    button {
+        font-size: 1rem;
     }
 }
-
 
 
